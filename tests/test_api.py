@@ -266,6 +266,7 @@ def test_tc12_anonymous_update_is_401_and_data_is_unchanged(client):
     assert client.get(f"/api/reports/{report['id']}").get_json()["status"] == "Submitted"
 
 
+# Jira CF-7｜S4 Staff 查看報修
 def test_tc12_staff_page_access_by_role(db_path, client):
     anonymous = client.get("/staff")
     assert anonymous.status_code == 302

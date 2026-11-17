@@ -89,6 +89,7 @@ function setupStaffPage() {
     return item;
   }
 
+  // Jira CF-7｜S4 Staff 查看報修
   async function loadReports(filters = currentFilters) {
     currentFilters = { ...filters };
     const sequence = ++loadSequence;
@@ -149,6 +150,7 @@ function setupStaffPage() {
     }
   }
 
+  // Jira CF-7｜S4 Staff 查看報修
   async function selectReport(id) {
     const sequence = ++selectSequence;
     activeId = id;

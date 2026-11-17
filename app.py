@@ -87,6 +87,7 @@ def create_app(db_path=None):
     def login_page():
         return render_template("login.html", forbidden=False)
 
+    # Jira CF-7｜S4 Staff 查看報修
     @app.get("/staff")
     def staff_page():
         user = current_user()
