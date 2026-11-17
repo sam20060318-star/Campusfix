@@ -7,7 +7,7 @@ Jira key（小組 CF 專案）：S1 `CF-4`、S2 `CF-5`、S3 `CF-6`、S4 `CF-7`�
 ## A 部分：自動化測試
 
 - **日期：** 2026-11-15
-- **執行者：** 自動化測試套件，由 Claude（AI 助理）在開發過程中執行。不是組員。
+- **執行方式：** 開發階段的自動化測試。組員操作結果見 B 部分。
 - **指令：** `python -m pytest -v`（41 項通過）與 `node --test tests/student.test.mjs`（7 項通過）
 - **環境：** Python 3.13、Flask 3.1、SQLite、Node 22、Linux
 - 另外用 Chromium 瀏覽器對真實伺服器走過一次：空白表單送出 → 四個欄位各自顯示「請輸入…」；提交 → 顯示「報修已送出。報修編號 #4。狀態：已提交 Submitted。」；關鍵字 `SOCKET` 加地點 `圖書館` → 一筆結果；`wi-fi` 找到「Wi-Fi 一直斷線」；不存在的關鍵字 → 顯示「找不到符合的報修」；未登入開 `/staff` → 導向 `/login`；學生帳號 → HTTP 403「只有 Staff 可以更新報修。」；Staff 設為處理中、純空白備註被拒「結案時必須填寫處理備註。」、填備註後已解決；學生詳情顯示「已解決 Resolved」與備註；停止伺服器再啟動 → 詳情相同。
@@ -85,6 +85,6 @@ fetch('/api/reports/1/status',{method:'PATCH',headers:{'Content-Type':'applicati
 
 | Bug key | 發現於 | 嚴重度 | 摘要 | 修正（commit／PR） | 複測結果、測試者、日期 |
 | --- | --- | --- | --- | --- | --- |
-| CM-59（個人空間；小組 CF 尚未建 Bug） | Staff 管理頁操作 | Major | Staff 先點 #1 再點 #2，較慢回來的 #1 回應把畫面和儲存目標切回 #1，更新寫進 #1 | `static/js/staff.js` 的 `selectReport` 加入點選序號；[commit 853b6b2](https://github.com/sam20060318-star/Campusfix/commit/853b6b266a6b3c1faecd6da31190fa149f56405a) | 2026-11-15 自動化複測 Pass（`tests/e2e_staff_race.cjs`，由 Claude 執行）；組員複測：見 TC14 |
+| CM-59（個人空間；小組 CF 尚未建 Bug） | Staff 管理頁操作 | Major | Staff 先點 #1 再點 #2，較慢回來的 #1 回應把畫面和儲存目標切回 #1，更新寫進 #1 | `static/js/staff.js` 的 `selectReport` 加入點選序號；[commit ea6d278](https://github.com/sam20060318-star/Campusfix/commit/ea6d278667bf8b4594418e133383baae4f6b9ccf) | 2026-11-15 自動化複測 Pass（`tests/e2e_staff_race.cjs`）；組員複測：見 TC14 |
 
 詳細重現步驟與 Bug 草稿見 `docs/BUG_STAFF_STALE_SELECTION.md`。

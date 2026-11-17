@@ -13,7 +13,7 @@
 1. 取得最新程式（二選一）：
    - 有裝 Git：`git clone https://github.com/sam20060318-star/Campusfix.git`
    - 沒裝 Git：打開 https://github.com/sam20060318-star/Campusfix ，按綠色「Code」→「Download ZIP」，解壓縮。
-2. **記下測試的版本**：GitHub 頁面上方「Latest commit」旁的 7 碼編號（例如 `853b6b2`），之後填進測試紀錄。
+2. **記下測試的版本**：GitHub 頁面上方「Latest commit」旁的 7 碼編號（例如 `ea6d278`），之後填進測試紀錄。
 3. 在專案資料夾裡新建一個 `test-evidence` 資料夾，所有截圖和輸出都存這裡。
 4. 用 VS Code 打開專案資料夾，選「Terminal → New Terminal」，依序執行：
 

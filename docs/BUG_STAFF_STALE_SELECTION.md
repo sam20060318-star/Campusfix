@@ -48,4 +48,4 @@
 | 連點 #1（最慢）、#2、#3 | 最後顯示 #3：Pass |
 | 原有 41 項 pytest、7 項前端測試 | 全部通過 |
 
-以上是 Claude 執行的自動化複測。請由組員在自己電腦上執行 `node tests/e2e_staff_race.cjs` 或手動操作複測，並把結果、測試者、日期填進 Jira Bug。
+上表為開發階段的自動化複測紀錄。請由組員在自己電腦上執行 `node tests/e2e_staff_race.cjs` 或手動操作複測，並把結果、測試者、日期填進 Jira Bug。
