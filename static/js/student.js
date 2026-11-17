@@ -23,6 +23,7 @@ export function validateReport(input) {
   return { values, errors };
 }
 
+// Jira CF-10｜S7 關鍵字搜尋報修
 export function buildReportUrl(base, filters = {}) {
   const origin = typeof window === 'undefined' ? 'http://localhost/' : window.location.href;
   const url = new URL(base, origin);

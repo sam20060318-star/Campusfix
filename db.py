@@ -90,6 +90,7 @@ def create_report(db_path, values):
     return _report(row)
 
 
+# Jira CF-10｜S7 關鍵字搜尋報修
 def list_reports(db_path, keyword="", location=""):
     """Newest first.
 

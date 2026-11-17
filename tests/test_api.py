@@ -169,6 +169,7 @@ def titles(client, **params):
     return sorted(item["title"] for item in client.get("/api/reports", query_string=params).get_json())
 
 
+# Jira CF-10｜S7 關鍵字搜尋報修
 def test_tc06_keyword_matches_title_or_description_in_any_letter_case(search_client):
     expected = ["Projector broken", "Screen is blank"]
     assert titles(search_client, keyword="projector") == expected
@@ -189,6 +190,7 @@ def test_tc07_location_filter_returns_only_that_location(search_client):
     assert titles(search_client, location="Lib") == []  # whole location must match
 
 
+# Jira CF-10｜S7 關鍵字搜尋報修
 def test_tc08_no_match_returns_empty_list_and_clearing_restores_all(search_client):
     assert titles(search_client, keyword="elevator") == []
     assert len(titles(search_client)) == 4
