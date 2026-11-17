@@ -230,6 +230,7 @@ def test_tc09_staff_updates_status_and_must_give_a_note_to_resolve(db_path, clie
     assert seen_by_student["resolution_note"] == "Replaced the lamp."
 
 
+# Jira CF-8｜S5 更新報修狀態
 def test_tc13_invalid_status_is_rejected_and_data_is_unchanged(db_path, client):
     staff = staff_client(db_path)
     report = submit(client)

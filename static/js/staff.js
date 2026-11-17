@@ -173,6 +173,7 @@ function setupStaffPage() {
   statusSelect.addEventListener('change', toggleNote);
   noteInput.addEventListener('input', () => { noteError.textContent = ''; noteInput.removeAttribute('aria-invalid'); });
 
+  // Jira CF-8｜S5 更新報修狀態
   statusForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (selectedId === null) return;

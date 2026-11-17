@@ -119,6 +119,7 @@ def get_report(db_path, report_id):
     return _report(row)
 
 
+# Jira CF-8｜S5 更新報修狀態
 def update_status(db_path, report_id, status, resolution_note):
     """Save status and note together. Returns the updated report or None."""
     with connect(db_path) as conn:

@@ -130,6 +130,7 @@ def create_app(db_path=None):
 
     # ---------- Staff API (S5, S6, S9) ----------
 
+    # Jira CF-8｜S5 更新報修狀態
     @app.patch("/api/reports/<int:report_id>/status")
     @staff_required
     def update_status(report_id):
