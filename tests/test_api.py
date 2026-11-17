@@ -60,6 +60,7 @@ def set_status(client, report_id, **body):
 
 # ---------- S1 Submit a problem report ----------
 
+# Jira CF-4｜S1 提交問題回報
 def test_tc01_valid_submission_saves_four_fields_with_id_and_submitted(client):
     created = submit(client)
     assert isinstance(created["id"], int)
@@ -71,6 +72,7 @@ def test_tc01_valid_submission_saves_four_fields_with_id_and_submitted(client):
     assert saved["resolution_note"] == ""
 
 
+# Jira CF-4｜S1 提交問題回報
 @pytest.mark.parametrize("field", ["title", "location", "category", "description"])
 @pytest.mark.parametrize("bad", ["", "   ", None, 123])
 def test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved(client, field, bad):
@@ -90,6 +92,7 @@ def test_tc02_non_json_body_is_rejected(client):
     assert client.get("/api/reports").get_json() == []
 
 
+# Jira CF-4｜S1 提交問題回報
 def test_tc03_separate_reports_get_different_ids(client):
     first = submit(client, title="First")
     second = submit(client, title="Second")
@@ -100,6 +103,7 @@ def test_tc03_separate_reports_get_different_ids(client):
 
 # ---------- Persistence ----------
 
+# Jira CF-4｜S1 提交問題回報
 def test_tc04_reports_and_updates_survive_application_restart(db_path):
     first_run = staff_client(db_path)
     report = submit(first_run)

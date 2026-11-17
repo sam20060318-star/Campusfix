@@ -29,6 +29,7 @@ def _secret_key(directory):
     return key_file.read_text(encoding="utf-8").strip()
 
 
+# Jira CF-4｜S1 提交問題回報
 def validate_report(body):
     """Server-side validation of the four required fields (CF S1)."""
     values, errors = {}, {}
@@ -97,6 +98,7 @@ def create_app(db_path=None):
 
     # ---------- Report API (S1, S2, S3, S7, S8) ----------
 
+    # Jira CF-4｜S1 提交問題回報
     @app.post("/api/reports")
     def create_report():
         body = request.get_json(silent=True)

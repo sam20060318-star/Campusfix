@@ -79,6 +79,7 @@ def _report(row):
     return dict(row) if row else None
 
 
+# Jira CF-4｜S1 提交問題回報
 def create_report(db_path, values):
     with connect(db_path) as conn:
         cursor = conn.execute(

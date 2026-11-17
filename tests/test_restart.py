@@ -50,6 +50,7 @@ def call(opener, method, url, body=None):
         return json.loads(response.read())
 
 
+# Jira CF-4｜S1 提交問題回報
 def test_tc04_real_process_restart_keeps_report_status_and_note(tmp_path):
     db_file = tmp_path / "campusfix.db"
     port = free_port()

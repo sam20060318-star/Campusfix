@@ -12,6 +12,7 @@ export const STATUS_LABELS = {
   Resolved: '已解決 Resolved',
 };
 
+// Jira CF-4｜S1 提交問題回報
 export function validateReport(input) {
   const values = {};
   const errors = {};
@@ -220,6 +221,7 @@ function setupStudentPage() {
     }
   }
 
+  // Jira CF-4｜S1 提交問題回報
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     submitFeedback.hidden = true;
