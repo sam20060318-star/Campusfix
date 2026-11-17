@@ -9,6 +9,7 @@ const STATUS_LABELS = {
   Resolved: '已解決 Resolved',
 };
 
+// Jira CF-9｜S6 填寫備註後結案
 export function validateStatusUpdate(status, note) {
   if (!STATUSES.includes(status)) return { error: '請選擇有效的狀態。' };
   const trimmed = String(note ?? '').trim();

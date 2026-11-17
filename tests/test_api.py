@@ -207,6 +207,7 @@ def test_locations_endpoint_lists_stored_values_once(search_client):
 
 # ---------- S4 / S5 / S6 Staff workflow ----------
 
+# Jira CF-9｜S6 填寫備註後結案
 def test_tc09_staff_updates_status_and_must_give_a_note_to_resolve(db_path, client):
     staff = staff_client(db_path)
     report = submit(client)
@@ -240,6 +241,7 @@ def test_tc13_invalid_status_is_rejected_and_data_is_unchanged(db_path, client):
     assert set_status(staff, 9999, status="In Progress").status_code == 404
 
 
+# Jira CF-9｜S6 填寫備註後結案
 def test_failed_resolve_keeps_an_existing_note(db_path, client):
     staff = staff_client(db_path)
     report = submit(client)
