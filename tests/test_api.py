@@ -182,6 +182,7 @@ def test_tc06_keyword_is_literal_not_a_wildcard(search_client):
     assert titles(search_client, keyword="_") == []
 
 
+# Jira CF-11｜S8 依地點篩選報修
 def test_tc07_location_filter_returns_only_that_location(search_client):
     results = search_client.get("/api/reports", query_string={"location": "Library"}).get_json()
     assert len(results) == 2
@@ -197,11 +198,13 @@ def test_tc08_no_match_returns_empty_list_and_clearing_restores_all(search_clien
     assert len(titles(search_client, keyword="  ", location="")) == 4
 
 
+# Jira CF-11｜S8 依地點篩選報修
 def test_tc11_keyword_and_location_together_use_and(search_client):
     assert titles(search_client, keyword="projector", location="Library") == ["Screen is blank"]
     assert titles(search_client, keyword="tap", location="Library") == []
 
 
+# Jira CF-11｜S8 依地點篩選報修
 def test_locations_endpoint_lists_stored_values_once(search_client):
     submit(search_client, location="library")
     assert search_client.get("/api/locations").get_json() == ["Building B", "Classroom A101", "Library"]

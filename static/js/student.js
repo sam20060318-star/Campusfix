@@ -84,6 +84,7 @@ function setupStudentPage() {
   if (body.dataset.preview === 'true') document.querySelector('#preview-banner').hidden = false;
 
   // Suggest locations that are already stored so filters use the same saved values.
+  // Jira CF-11｜S8 依地點篩選報修
   async function loadLocations() {
     const datalist = document.querySelector('#known-locations');
     if (!datalist || !body.dataset.locationsUrl) return;

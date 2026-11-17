@@ -124,6 +124,7 @@ def create_app(db_path=None):
         report = db.get_report(db_path, report_id)
         return jsonify(report) if report else error(404, "找不到這筆報修。")
 
+    # Jira CF-11｜S8 依地點篩選報修
     @app.get("/api/locations")
     def list_locations():
         return jsonify(db.list_locations(db_path))

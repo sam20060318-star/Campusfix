@@ -134,6 +134,7 @@ def update_status(db_path, report_id, status, resolution_note):
     return _report(row)
 
 
+# Jira CF-11｜S8 依地點篩選報修
 def list_locations(db_path):
     """Distinct stored locations, used as suggestions so filters match saved values."""
     with connect(db_path) as conn:
