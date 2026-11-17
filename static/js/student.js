@@ -198,6 +198,7 @@ function setupStudentPage() {
     container.append(wrap);
   }
 
+  // Jira CF-6｜S3 查看報修詳情與狀態
   async function showDetails(id) {
     detailContent.replaceChildren();
     detailState.textContent = '正在載入報修…';

@@ -112,6 +112,7 @@ def list_reports(db_path, keyword="", location=""):
     return [_report(row) for row in rows]
 
 
+# Jira CF-6｜S3 查看報修詳情與狀態
 def get_report(db_path, report_id):
     with connect(db_path) as conn:
         row = conn.execute("SELECT * FROM reports WHERE id = ?", (report_id,)).fetchone()

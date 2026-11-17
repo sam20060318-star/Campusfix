@@ -117,6 +117,7 @@ def create_app(db_path=None):
         location = request.args.get("location", "")
         return jsonify(db.list_reports(db_path, keyword, location))
 
+    # Jira CF-6｜S3 查看報修詳情與狀態
     @app.get("/api/reports/<int:report_id>")
     def get_report(report_id):
         report = db.get_report(db_path, report_id)

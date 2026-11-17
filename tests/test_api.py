@@ -131,6 +131,7 @@ def test_list_is_empty_before_any_report(client):
     assert client.get("/api/reports").get_json() == []
 
 
+# Jira CF-6｜S3 查看報修詳情與狀態
 def test_tc05_list_and_details_agree_and_show_latest_status(db_path, client):
     report = submit(client)
     listed = client.get("/api/reports").get_json()
@@ -145,6 +146,7 @@ def test_tc05_list_and_details_agree_and_show_latest_status(db_path, client):
     assert client.get("/api/reports").get_json()[0]["status"] == "In Progress"
 
 
+# Jira CF-6｜S3 查看報修詳情與狀態
 def test_tc13_unknown_report_id_returns_404(client):
     response = client.get("/api/reports/9999")
     assert response.status_code == 404
