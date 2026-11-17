@@ -1,0 +1,80 @@
+CAMPUSFIX AUTOMATED TEST EXECUTION LOG
+
+Date: 16 November 2026
+Tester: OpenAI assistant
+Source archive: campusfix (3).zip
+SHA-256: 4349532b0d658a794794f91663be33722c2c7bd949aeb3e9278fce25a4ac23db
+Environment: Linux, Python 3.12.14, pytest 8.3.5, Node.js 24.22.1.
+Backend dependencies were prepared from official release source files in an isolated temporary PYTHONPATH; version metadata needed for this source-only setup was supplied locally. The initial environment setup attempt failed because Werkzeug package metadata was absent; it was added before the successful full run below. The application source was not changed for testing.
+Backend command: python3 -m pytest -v --tb=short
+Frontend command: node --test tests/student.test.mjs
+Backend test data: temporary SQLite databases. The restart check used the real Flask server process and HTTP.
+JavaScript request tests use a temporary test server. Browser visual checks were not run.
+
+--- BACKEND OUTPUT ---
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.3.5, pluggy-1.5.0 -- /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3
+cachedir: .pytest_cache
+rootdir: /workspace/scratch/adbdb3a6cfd4/work/campusfix_report_review/campusfix
+collecting ... collected 41 items
+
+tests/test_api.py::test_tc01_valid_submission_saves_four_fields_with_id_and_submitted PASSED [  2%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[-title] PASSED [  4%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[-location] PASSED [  7%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[-category] PASSED [  9%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[-description] PASSED [ 12%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[   -title] PASSED [ 14%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[   -location] PASSED [ 17%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[   -category] PASSED [ 19%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[   -description] PASSED [ 21%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[None-title] PASSED [ 24%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[None-location] PASSED [ 26%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[None-category] PASSED [ 29%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[None-description] PASSED [ 31%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[123-title] PASSED [ 34%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[123-location] PASSED [ 36%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[123-category] PASSED [ 39%]
+tests/test_api.py::test_tc02_missing_or_blank_field_is_rejected_and_nothing_is_saved[123-description] PASSED [ 41%]
+tests/test_api.py::test_tc02_non_json_body_is_rejected PASSED            [ 43%]
+tests/test_api.py::test_tc03_separate_reports_get_different_ids PASSED   [ 46%]
+tests/test_api.py::test_tc04_reports_and_updates_survive_application_restart PASSED [ 48%]
+tests/test_api.py::test_reinitialising_the_database_keeps_existing_reports PASSED [ 51%]
+tests/test_api.py::test_list_is_empty_before_any_report PASSED           [ 53%]
+tests/test_api.py::test_tc05_list_and_details_agree_and_show_latest_status PASSED [ 56%]
+tests/test_api.py::test_tc13_unknown_report_id_returns_404 PASSED        [ 58%]
+tests/test_api.py::test_tc06_keyword_matches_title_or_description_in_any_letter_case PASSED [ 60%]
+tests/test_api.py::test_tc06_keyword_is_literal_not_a_wildcard PASSED    [ 63%]
+tests/test_api.py::test_tc07_location_filter_returns_only_that_location PASSED [ 65%]
+tests/test_api.py::test_tc08_no_match_returns_empty_list_and_clearing_restores_all PASSED [ 68%]
+tests/test_api.py::test_tc11_keyword_and_location_together_use_and PASSED [ 70%]
+tests/test_api.py::test_locations_endpoint_lists_stored_values_once PASSED [ 73%]
+tests/test_api.py::test_tc09_staff_updates_status_and_must_give_a_note_to_resolve PASSED [ 75%]
+tests/test_api.py::test_tc13_invalid_status_is_rejected_and_data_is_unchanged PASSED [ 78%]
+tests/test_api.py::test_failed_resolve_keeps_an_existing_note PASSED     [ 80%]
+tests/test_api.py::test_tc10_student_account_cannot_update_status PASSED [ 82%]
+tests/test_api.py::test_tc12_anonymous_update_is_401_and_data_is_unchanged PASSED [ 85%]
+tests/test_api.py::test_tc12_staff_page_access_by_role PASSED            [ 87%]
+tests/test_api.py::test_role_comes_from_the_server_not_from_the_request PASSED [ 90%]
+tests/test_api.py::test_login_logout_and_wrong_password PASSED           [ 92%]
+tests/test_api.py::test_passwords_are_stored_hashed PASSED               [ 95%]
+tests/test_api.py::test_student_page_is_served PASSED                    [ 97%]
+tests/test_restart.py::test_tc04_real_process_restart_keeps_report_status_and_note PASSED [100%]
+
+============================= 41 passed in 10.20s ==============================
+
+--- JAVASCRIPT OUTPUT ---
+✔ blank fields are rejected and an error identifies each missing field (1.862637ms)
+✔ a valid report is trimmed without changing its meaning (0.250097ms)
+✔ keyword and location are both encoded in the search URL (0.367243ms)
+✔ a successful submission sends exactly the four fields and returns the server ID (36.827225ms)
+✔ an unsuccessful submission surfaces the server error (9.795462ms)
+✔ resolving without a note, or with only spaces, is blocked before sending (0.450089ms)
+✔ a valid status update sends the trimmed note only when resolving (0.381845ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 279.440233
