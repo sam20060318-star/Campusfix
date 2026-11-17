@@ -1,11 +1,23 @@
-# CampusFix｜完整測試步驟（中文介面版）
+# CampusFix｜完整測試流程（給測試負責人）
 
-照順序做，報修編號才會和下面寫的一樣。整套約 45 分鐘，可以四人分著做。
+負責人：劉智丞（Jira CM-55 T7 測試紀錄與缺陷複測）。一個人照順序做完約 70 分鐘。
+**照順序做**，報修編號才會和下面寫的一樣。做完把結果填進 `docs/TEST_RECORD.md` 的 B 部分。
 
-## 第 0 步：準備（只做一次）
+> 為什麼要你親手做：repo 裡已有 AI 跑過的自動化測試，但作業要求組員實際執行並記錄。
+> 所以「測試者」欄只能寫實際操作的人。結果和預期不同就寫 Fail，不可以改成 Pass。
 
-1. 解壓縮 `campusfix.zip`，用 VS Code 打開 `campusfix` 資料夾。
-2. 選「Terminal → New Terminal」，依序執行：
+## 第 0 步：準備（只做一次，約 10 分鐘）
+
+需要：Python 3.10 以上、Node.js 18 以上（只有第 1 步的前端測試和 TC14 要用）、Chrome。
+
+1. 取得最新程式（二選一）：
+   - 有裝 Git：`git clone https://github.com/sam20060318-star/Campusfix.git`
+   - 沒裝 Git：打開 https://github.com/sam20060318-star/Campusfix ，按綠色「Code」→「Download ZIP」，解壓縮。
+2. **記下測試的版本**：GitHub 頁面上方「Latest commit」旁的 7 碼編號（例如 `853b6b2`），之後填進測試紀錄。
+3. 在專案資料夾裡新建一個 `test-evidence` 資料夾，所有截圖和輸出都存這裡。
+4. 用 VS Code 打開專案資料夾，選「Terminal → New Terminal」，依序執行：
+
+**Windows（PowerShell）**
 
 ```bash
 py -3 -m venv .venv
@@ -21,9 +33,11 @@ py -3 -m venv .venv
 pip install -r requirements.txt
 ```
 
-3. 如果之前啟動過舊版，先刪掉 `instance` 資料夾，讓資料從頭開始。
+**macOS**：前兩行改成 `python3 -m venv .venv` 和 `source .venv/bin/activate`，其餘相同。
 
-## 第 1 步：自動化測試
+5. 如果這台電腦之前啟動過 CampusFix，先刪掉 `instance` 資料夾，讓資料從頭開始。
+
+## 第 1 步：自動化測試（約 5 分鐘）
 
 ```bash
 python -m pytest -v
@@ -35,9 +49,12 @@ python -m pytest -v
 node --test tests/student.test.mjs
 ```
 
-預期：`# pass 7`、`# fail 0`（沒裝 Node.js 可跳過）。兩個結果都截圖。
+預期：`# pass 7`、`# fail 0`。
 
-## 第 2 步：啟動網站
+兩個結果都截圖存進 `test-evidence`（檔名例如 `01-pytest.png`、`02-node.png`），截圖要包含最後的通過數字。
+這一步由你親手執行，所以測試紀錄 A 部分可以再加一行「執行者：劉智丞、日期、commit 編號」。
+
+## 第 2 步：啟動網站（之後都在瀏覽器操作，約 50 分鐘）
 
 ```bash
 python app.py --seed-demo
@@ -211,10 +228,64 @@ fetch('/api/reports/1/status',{method:'PATCH',headers:{'Content-Type':'applicati
 
 ---
 
+---
+
+## D. 缺陷複測（Bug CM-59）
+
+### TC14　Staff 快速切換報修時，不會存錯筆（S4、S5）
+
+原本的缺陷：Staff 先點 #1 再馬上點 #2，如果 #1 的資料比較晚回來，畫面會跳回 #1，按「儲存狀態」會改到 #1。
+
+**做法一：自動重現腳本（建議，約 10 分鐘，是主要證據）**
+
+1. 另開一個終端機（網站那個不用關），一樣先啟用 `.venv`，然後執行一次安裝：
+
+```bash
+npm install --no-save playwright
+```
+
+```bash
+npx playwright install chromium
+```
+
+2. 執行：
+
+```bash
+node tests/e2e_staff_race.cjs
+```
+
+**預期**：顯示 `PASS  staff page keeps the last clicked report and saves to it`。如果顯示 `FAIL`，就記 Fail。這個腳本會故意讓 #1 的回應變慢，並用自己的暫存資料庫，不會動到你測試中的資料。截圖存檔。
+
+**做法二：手動確認（約 5 分鐘）**
+
+1. 一般視窗打開 Staff 管理頁（已用 staff 登入），按 `F12` →「Network」分頁 → 上方速度選單從「No throttling」改成「3G」。
+2. 在列表點 #1，**馬上**點 #2。
+3. 等載入完成，確認右邊標題是「報修 #2」。載入中會先顯示「正在載入報修 #2…」，這段時間不能儲存。
+4. 狀態選「處理中 In Progress」，按「儲存狀態」。
+5. 把速度改回「No throttling」，在列表看 #1 和 #2 的狀態。
+
+**預期**：畫面停在 #2；成功訊息是「報修 #2 目前狀態：處理中 In Progress」；#1 仍是「已提交 Submitted」。
+
+> 手動做法不一定每次都能讓 #1 比 #2 慢，所以主要證據是做法一；做法二確認實際操作看起來正常。
+
 ## 記錄方式
 
-- 每做完一個案例，填 `docs/TEST_RECORD.md` B 部分：**實際結果**（看到什麼）、**Pass/Fail**、**測試者／日期**（實際操作者的名字）。
-- 每個案例截圖（`Win+Shift+S`），主控台案例要把 Console 輸出一起截進去。
-- 建議分工：A 做 TC01～TC03、B 做 TC06～TC08、TC11，C 做 TC05、TC09、TC10、TC12，D 做 TC04、TC13 和自動化測試。
-- 結果和預期不同就記 Fail，到 Jira 建 Bug（重現步驟、預期、實際、截圖），修好後複測並記錄。不可以把 Fail 改成 Pass。
+- 每做完一個案例，就填 `docs/TEST_RECORD.md` B 部分：**實際結果**（寫你看到的畫面或訊息）、**Pass/Fail**、**測試者／日期**（劉智丞、實際日期）。
+- 每個案例都截圖（Windows：`Win+Shift+S`），存進 `test-evidence`，檔名用案例編號，例如 `TC09-step6.png`。主控台案例要把 Console 輸出一起截進去。
+- 結果和預期不同：記 Fail，到 Jira 建 Bug（重現步驟、預期、實際、截圖），修好後再測一次並記錄。
 - 想從頭重測：`Ctrl+C` 停止網站，刪掉 `instance` 資料夾，再執行 `python app.py --seed-demo`。
+
+## 做完後交出什麼
+
+1. 填好的 `docs/TEST_RECORD.md`：開一個分支 commit，標題例如 `CF-6 Record manual test results`，再開 PR 請組員 review。
+2. `test-evidence` 資料夾：截圖可以放進團隊報告附錄，或上傳到對應的 Jira 卡片。
+3. 在 Jira 把 CM-55（T7）和各測試 Subtask 移到完成。
+
+## 案例總覽（做完一項打勾）
+
+- [ ] 第 1 步　自動化測試（41 + 7）
+- [ ] TC01 有效提交　- [ ] TC02 缺少必填　- [ ] TC03 唯一編號
+- [ ] TC06 關鍵字　- [ ] TC07 地點　- [ ] TC11 AND　- [ ] TC08 查無結果
+- [ ] TC05 + TC09 Staff 更新與結案備註　- [ ] TC04 重新整理與重啟
+- [ ] TC12 未登入　- [ ] TC10 學生不能更新　- [ ] TC12 學生進不了管理頁　- [ ] TC13 不存在的編號與非法狀態
+- [ ] TC14 Bug 複測
