@@ -258,6 +258,7 @@ def test_failed_resolve_keeps_an_existing_note(db_path, client):
 
 # ---------- S9 Authorization ----------
 
+# Jira CF-12｜S9 Staff 權限控管
 def test_tc10_student_account_cannot_update_status(db_path, client):
     report = submit(client)
     student = student_client(db_path)
@@ -267,6 +268,7 @@ def test_tc10_student_account_cannot_update_status(db_path, client):
     assert (saved["status"], saved["resolution_note"]) == ("Submitted", "")
 
 
+# Jira CF-12｜S9 Staff 權限控管
 def test_tc12_anonymous_update_is_401_and_data_is_unchanged(client):
     report = submit(client)
     response = set_status(client, report["id"], status="In Progress")
@@ -283,6 +285,7 @@ def test_tc12_staff_page_access_by_role(db_path, client):
     assert staff_client(db_path).get("/staff").status_code == 200
 
 
+# Jira CF-12｜S9 Staff 權限控管
 def test_role_comes_from_the_server_not_from_the_request(db_path, client):
     report = submit(client)
     student = student_client(db_path)

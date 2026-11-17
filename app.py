@@ -61,11 +61,13 @@ def create_app(db_path=None):
     def error(status, message, **extra):
         return jsonify({"error": message, **extra}), status
 
+    # Jira CF-12｜S9 Staff 權限控管
     def current_user():
         """The role always comes from the server-side account, never from the request."""
         username = session.get("username")
         return db.get_user(db_path, username) if username else None
 
+    # Jira CF-12｜S9 Staff 權限控管
     def staff_required(view):
         @wraps(view)
         def wrapper(*args, **kwargs):
@@ -156,6 +158,7 @@ def create_app(db_path=None):
 
     # ---------- Authentication (S9) ----------
 
+    # Jira CF-12｜S9 Staff 權限控管
     @app.post("/api/login")
     def login():
         body = request.get_json(silent=True)

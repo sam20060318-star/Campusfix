@@ -144,6 +144,7 @@ def list_locations(db_path):
     return [row["location"] for row in rows]
 
 
+# Jira CF-12｜S9 Staff 權限控管
 def get_user(db_path, username):
     with connect(db_path) as conn:
         row = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
