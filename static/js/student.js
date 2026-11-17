@@ -133,6 +133,7 @@ function setupStudentPage() {
     listState.hidden = !message;
   }
 
+  // Jira CF-5｜S2 查看報修列表
   function renderReport(report) {
     const item = makeElement('li', 'report-item');
     const left = makeElement('div', 'report-main');
@@ -161,6 +162,7 @@ function setupStudentPage() {
     return item;
   }
 
+  // Jira CF-5｜S2 查看報修列表
   async function loadReports(filters = {}) {
     currentFilters = { ...filters };
     const sequence = ++loadSequence;

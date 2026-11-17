@@ -126,6 +126,7 @@ def test_reinitialising_the_database_keeps_existing_reports(db_path, client):
 
 # ---------- S2 / S3 List and details ----------
 
+# Jira CF-5｜S2 查看報修列表
 def test_list_is_empty_before_any_report(client):
     assert client.get("/api/reports").get_json() == []
 

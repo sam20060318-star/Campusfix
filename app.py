@@ -110,6 +110,7 @@ def create_app(db_path=None):
             return error(400, first, errors=errors)
         return jsonify(db.create_report(db_path, values)), 201
 
+    # Jira CF-5｜S2 查看報修列表
     @app.get("/api/reports")
     def list_reports():
         keyword = request.args.get("keyword", "")
