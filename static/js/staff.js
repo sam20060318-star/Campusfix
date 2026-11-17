@@ -152,6 +152,7 @@ function setupStaffPage() {
   }
 
   // Jira CF-7｜S4 Staff 查看報修
+  // Bug CM-59｜快速切換報修時只接受最後一次點選的回應
   async function selectReport(id) {
     const sequence = ++selectSequence;
     activeId = id;

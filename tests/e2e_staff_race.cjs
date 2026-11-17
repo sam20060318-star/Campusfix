@@ -1,3 +1,4 @@
+// Bug CM-59｜重現並確認已修正：Staff 快速切換時，較慢的回應不能蓋掉最後點選的報修
 // Regression test for the staff page "late response" bug (optional, needs Playwright).
 //
 // Bug: staff clicks #1, then #2. If #1's details arrive later, the page switched back to #1
