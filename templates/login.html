@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusFix｜登入</title>
+  <link rel="stylesheet" href="/static/css/student.css">
+  <link rel="stylesheet" href="/static/css/staff.css">
+  <script type="module" src="/static/js/login.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="CampusFix 首頁">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 10.3 12 4l7.5 6.3V19H4.5v-8.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.1 19v-5.2h5.8V19M8.4 8.4V5.7h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>campus<span class="brand-light">fix</span><small>STAFF 登入</small></span>
+      </a>
+      <nav class="top-nav" aria-label="主選單"><a href="/">學生頁面</a></nav>
+    </div>
+  </header>
+
+  <main class="page login-page">
+    <section class="panel login-panel" aria-labelledby="login-title">
+      <div class="panel-heading">
+        <div><span class="section-kicker">STAFF 專區</span><h2 id="login-title">登入</h2><p>只有 Staff 帳號可以管理報修。</p></div>
+      </div>
+      {% if forbidden %}
+      <p class="form-feedback error" id="forbidden-message">你目前以 <strong>{{ username }}</strong> 登入，這不是 Staff 帳號。請改用 Staff 帳號登入才能管理報修。</p>
+      {% endif %}
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="username">帳號</label>
+          <input id="username" name="username" type="text" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">密碼</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="button primary-button" type="submit" id="login-button">登入</button>
+        <p class="form-feedback error" id="login-feedback" role="alert" hidden></p>
+      </form>
+      <div class="demo-accounts">
+        <strong>示範帳號（虛構）</strong>
+        <span>Staff：<code>staff</code> / <code>staff123</code></span>
+        <span>學生：<code>student</code> / <code>student123</code>（不能管理報修）</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

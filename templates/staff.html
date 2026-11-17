@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusFix｜Staff 管理</title>
+  <link rel="stylesheet" href="/static/css/student.css">
+  <link rel="stylesheet" href="/static/css/staff.css">
+  <script type="module" src="/static/js/staff.js"></script>
+</head>
+<body data-api-base="/api/reports">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/staff" aria-label="CampusFix Staff 首頁">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 10.3 12 4l7.5 6.3V19H4.5v-8.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.1 19v-5.2h5.8V19M8.4 8.4V5.7h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>campus<span class="brand-light">fix</span><small>STAFF 管理</small></span>
+      </a>
+      <nav class="top-nav" aria-label="主選單">
+        <a href="/">學生頁面</a>
+        <span class="signed-in">登入身分：<strong id="staff-name">{{ username }}</strong></span>
+        <button type="button" class="nav-cta nav-button" id="logout-button">登出</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page staff-page">
+    <section class="workspace staff-workspace" aria-label="Staff 工作區">
+      <section class="panel" aria-labelledby="staff-list-title">
+        <div class="panel-heading reports-heading">
+          <div><span class="section-kicker">全部報修</span><h2 id="staff-list-title">選擇報修</h2><p>選一筆報修來檢視內容並記錄處理進度。</p></div>
+          <span class="count-pill" id="results-count" aria-live="polite">載入中…</span>
+        </div>
+        <form class="filter-form" id="filter-form" role="search">
+          <div class="search-field">
+            <label class="visually-hidden" for="keyword">搜尋報修</label>
+            <span aria-hidden="true" class="search-icon">⌕</span>
+            <input type="search" id="keyword" name="keyword" placeholder="輸入關鍵字搜尋">
+          </div>
+          <div class="location-filter">
+            <label class="visually-hidden" for="filter-location">依地點篩選</label>
+            <input type="text" id="filter-location" name="location" placeholder="地點">
+          </div>
+          <button class="button filter-button" type="submit">搜尋</button>
+        </form>
+        <div class="list-toolbar"><span>報修</span><div><button type="button" id="clear-filters" class="text-button">清除條件</button><button type="button" id="retry-list" class="text-button">重新整理</button></div></div>
+        <p id="list-state" class="list-state" role="status" aria-live="polite">正在載入報修…</p>
+        <ul class="report-list staff-list" id="report-list" aria-busy="true"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="manage-title">
+        <div class="panel-heading">
+          <div><span class="section-kicker">管理報修</span><h2 id="manage-title">報修詳情</h2><p id="manage-hint">尚未選擇報修。</p></div>
+        </div>
+        <div id="manage-content" hidden>
+          <div class="detail-top"><span class="detail-id" id="manage-id"></span><span id="manage-status"></span></div>
+          <h3 class="detail-title" id="manage-report-title"></h3>
+          <dl class="detail-grid" id="manage-fields"></dl>
+          <form id="status-form" novalidate>
+            <div class="field">
+              <label for="status">狀態</label>
+              <select id="status" name="status">
+                <option value="Submitted">已提交 Submitted</option>
+                <option value="In Progress">處理中 In Progress</option>
+                <option value="Resolved">已解決 Resolved</option>
+              </select>
+            </div>
+            <div class="field" id="note-field" hidden>
+              <label for="resolution_note">處理備註 <span aria-hidden="true">*</span></label>
+              <textarea id="resolution_note" name="resolution_note" rows="3" placeholder="請說明問題是如何處理的。" aria-describedby="note-error"></textarea>
+              <p class="field-error" id="note-error"></p>
+            </div>
+            <button class="button primary-button" type="submit" id="save-button">儲存狀態</button>
+            <p class="form-feedback" id="save-feedback" role="status" aria-live="polite" hidden></p>
+          </form>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

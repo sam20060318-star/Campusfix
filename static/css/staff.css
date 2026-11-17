@@ -1,0 +1,22 @@
+/* Staff and sign-in pages. Builds on student.css. */
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.staff-page{padding-top:34px;padding-bottom:40px}
+.staff-workspace{grid-template-columns:minmax(0,1.1fr) minmax(320px,1fr)}
+.signed-in{color:#78877d;font-weight:500;font-size:.78rem}
+.nav-button{border:0;cursor:pointer;font-weight:700;font-family:inherit}
+.staff-list .report-item{padding:0}
+.staff-row{display:flex;justify-content:space-between;align-items:center;gap:14px;width:100%;padding:14px 10px;border:0;border-left:3px solid transparent;background:transparent;text-align:left;font-family:inherit;color:inherit;cursor:pointer}
+.staff-row:hover{background:#f6f9f3}
+.staff-row[aria-current=true]{background:#eff4e9;border-left-color:#315e48}
+.staff-row .report-main,.staff-row .report-meta,.staff-row .report-title{display:block}
+.staff-row .report-meta span{margin-right:6px}
+.staff-row .report-title{font-weight:700;margin:5px 0 0}
+#status-form{margin-top:18px;padding-top:18px;border-top:1px solid #eef1ec}
+.login-page{display:grid;place-items:start center;padding-top:48px;padding-bottom:48px}
+.login-panel{width:min(430px,100%)}
+.login-panel .form-feedback{margin:0 0 16px}
+.login-panel form .form-feedback{margin:13px 0 0}
+.demo-accounts{display:grid;gap:5px;margin-top:20px;padding-top:16px;border-top:1px solid #eef1ec;color:#78877d;font-size:.76rem;line-height:1.5}
+.demo-accounts strong{color:#3e5747}
+.demo-accounts code{background:#f0f4ec;border-radius:4px;padding:1px 5px;color:#315e48}
+@media(max-width:650px){.staff-workspace{grid-template-columns:1fr}.signed-in{display:none}.top-nav>a:first-child{display:inline}}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <title>CampusFix｜學生報修中心</title>
+  <link rel="stylesheet" href="/static/css/student.css">
+  <script type="module" src="/static/js/student.js"></script>
+</head>
+<body data-api-base="/api/reports" data-locations-url="/api/locations" data-preview="false">
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <div class="preview-banner" id="preview-banner" hidden>預覽模式 · 範例資料為暫時性，停止預覽伺服器後會重置。</div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="CampusFix 首頁">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 10.3 12 4l7.5 6.3V19H4.5v-8.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.1 19v-5.2h5.8V19M8.4 8.4V5.7h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>campus<span class="brand-light">fix</span><small>學生報修中心</small></span>
+      </a>
+      <nav class="top-nav" aria-label="主選單">
+        <a href="#reports">瀏覽報修</a>
+        <a href="/staff">Staff 管理</a>
+        <a class="nav-cta" href="#submit">+ 我要報修</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page" tabindex="-1">
+    <section class="hero" id="top" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> 一起讓校園更好</span>
+        <h1 id="page-title">發現問題了嗎？<br><span>一起讓它變好。</span></h1>
+        <p>從投影機故障到 Wi-Fi 斷線，把需要處理的問題回報給我們，並在同一個地方追蹤處理進度。</p>
+        <a class="hero-link" href="#submit">回報問題 <svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <aside class="how-card" aria-label="使用方式">
+        <div class="how-heading"><span>使用方式</span><span class="how-icon" aria-hidden="true">✳</span></div>
+        <div class="step"><span class="step-num">01</span><div><strong>告訴我們哪裡有問題</strong><small>填寫問題內容與地點。</small></div></div>
+        <div class="step"><span class="step-num">02</span><div><strong>持續追蹤</strong><small>在列表中找到你的報修。</small></div></div>
+        <div class="step"><span class="step-num">03</span><div><strong>查看進度</strong><small>確認最新的處理狀態。</small></div></div>
+      </aside>
+    </section>
+
+    <section class="workspace" aria-label="報修工作區">
+      <section class="panel form-panel" id="submit" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <div><span class="section-kicker">開始報修</span><h2 id="form-title">回報問題</h2><p>告訴我們你發現了什麼。</p></div>
+          <span class="panel-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <form id="report-form" novalidate>
+          <div class="field">
+            <label for="title">問題標題 <span aria-hidden="true">*</span></label>
+            <input id="title" name="title" type="text" placeholder="例如：投影機無法開機" required aria-describedby="title-error">
+            <p class="field-error" id="title-error"></p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="location">地點 <span aria-hidden="true">*</span></label>
+              <input id="location" name="location" type="text" placeholder="例如：教室 A101" list="known-locations" required aria-describedby="location-error">
+              <p class="field-error" id="location-error"></p>
+            </div>
+            <div class="field">
+              <label for="category">分類 <span aria-hidden="true">*</span></label>
+              <select id="category" name="category" required aria-describedby="category-error">
+                <option value="">請選擇分類</option>
+                <option value="教室設備">教室設備</option>
+                <option value="設施">設施</option>
+                <option value="Wi-Fi 與資訊">Wi-Fi 與資訊</option>
+                <option value="其他">其他</option>
+              </select>
+              <p class="field-error" id="category-error"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="description">問題描述 <span aria-hidden="true">*</span></label>
+            <textarea id="description" name="description" rows="4" placeholder="請描述有助於工作人員了解問題的細節。" required aria-describedby="description-error"></textarea>
+            <p class="field-error" id="description-error"></p>
+          </div>
+          <p class="form-hint"><span aria-hidden="true">✳</span> 請勿填寫個人資料。</p>
+          <button class="button primary-button" type="submit" id="submit-button">送出報修</button>
+          <p class="form-feedback" id="submit-feedback" role="status" aria-live="polite" hidden></p>
+        </form>
+      </section>
+
+      <section class="panel reports-panel" id="reports" aria-labelledby="reports-title">
+        <div class="panel-heading reports-heading">
+          <div><span class="section-kicker">校園報修</span><h2 id="reports-title">目前的報修</h2><p>送出前先搜尋，確認問題是否已經有人回報。</p></div>
+          <span class="count-pill" id="results-count" aria-live="polite">載入中…</span>
+        </div>
+        <form class="filter-form" id="filter-form" role="search">
+          <div class="search-field">
+            <label class="visually-hidden" for="keyword">搜尋報修</label>
+            <span aria-hidden="true" class="search-icon">⌕</span>
+            <input type="search" id="keyword" name="keyword" placeholder="輸入關鍵字搜尋">
+          </div>
+          <div class="location-filter">
+            <label class="visually-hidden" for="filter-location">依地點篩選</label>
+            <input type="text" id="filter-location" name="location" list="known-locations" placeholder="地點">
+          </div>
+          <button class="button filter-button" type="submit">搜尋</button>
+        </form>
+        <div class="list-toolbar"><span>報修 <span class="toolbar-separator">/</span> 全部狀態</span><div><button type="button" id="clear-filters" class="text-button">清除條件</button><button type="button" id="retry-list" class="text-button refresh-button">重新整理</button></div></div>
+        <p id="list-state" class="list-state" role="status" aria-live="polite">正在載入報修…</p>
+        <p class="filter-help">關鍵字會比對標題與描述，不分英文大小寫。地點必須與完整的地點名稱相同。兩者同時填寫時，報修必須兩項都符合才會顯示。</p>
+        <ul class="report-list" id="report-list" aria-busy="true"></ul>
+        <div class="reports-footnote"><span aria-hidden="true">✦</span> 每一筆報修都讓校園更好。</div>
+      </section>
+    </section>
+    <footer class="footer"><span>© CampusFix <span class="footer-divider">/</span> 為校園社群而做</span><a href="#top">回到頂端</a></footer>
+  </main>
+
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="dialog-heading">
+    <div class="dialog-header"><div><span class="section-kicker">校園報修</span><h2 id="dialog-heading">報修詳情</h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="關閉報修詳情">×</button></div>
+    <p id="detail-state" role="status" aria-live="polite"></p>
+    <div id="detail-content"></div>
+  </dialog>
+  <datalist id="known-locations"></datalist>
+  <noscript><div class="noscript-warning">需要啟用 JavaScript 才能提交與查看報修。</div></noscript>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "campusfix",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/student.test.mjs"
+  }
+}
