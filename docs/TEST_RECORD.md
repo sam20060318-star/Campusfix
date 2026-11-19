@@ -10,7 +10,7 @@ Story 對應：S1 `CM-5`、S2 `CM-6`、S3 `CM-7`、S4 `CM-8`、S5 `CM-9`、S6 `C
 ## A 部分：自動化測試（原始開發階段紀錄）
 
 
-- **日期：** 2026-11-15
+- **日期：** 2026-11-16
 - **執行方式：** 開發階段的自動化測試。組員操作結果見 B 部分。
 - **指令：** `python -m pytest -v`（41 項通過）與 `node --test tests/student.test.mjs`（7 項通過）
 - **環境：** Python 3.13、Flask 3.1、SQLite、Node 22、Linux
