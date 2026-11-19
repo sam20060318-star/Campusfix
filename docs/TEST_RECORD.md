@@ -126,4 +126,3 @@ fetch('/api/reports/1/status',{method:'PATCH',headers:{'Content-Type':'applicati
 
 - **14 項人工案例均已完成並記錄為 Pass**（TC06、TC09 已於 2026-11-18 補測；TC08 使用等效無結果測資）。TC09 純空格輸入依測試者操作紀錄，並以畫面驗證訊息及 API 狀態未變作為結果證據。
 - 原歷史自動化測試保留原紀錄的結果，與本次個人執行的 TC14 Playwright 測試分開列示。
-- GitHub 提交前，請確認本文件引用的證據圖實際位於專案 `test-evidence/`；本次新增的 TC06／TC09 三張截圖也應一併存入。
